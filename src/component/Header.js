@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Platform } from 'react-native';
-
+import { View, Text, TouchableOpacity } from 'react-native';
 import Utils from './Utils';
 import { Colors, Fonts } from 'theme';
 

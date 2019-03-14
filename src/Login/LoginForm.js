@@ -4,6 +4,7 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
+import HookDemo from '../Hooks/HookDemo';
 
 class LoginForm extends Component {
 	onEmailChange(text) {
@@ -35,6 +36,8 @@ class LoginForm extends Component {
 				/>
 
 				<Button onPress={this.onButtonPress.bind(this)} style={{ margin: 30 }} title={'Submit'} />
+
+				<HookDemo />
 			</View>
 		);
 	}
