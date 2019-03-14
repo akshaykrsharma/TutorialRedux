@@ -1,4 +1,4 @@
-const INITIAL_STATE = { email: '', password: '' };
+const INITIAL_STATE = { email: '', password: '', error: '' };
 import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_ERROR } from './../actions/types';
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,15 +12,14 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, password: action.payload };
 
 		case LOGIN_USER_SUCCESS:
-			console.warn('AuthReducer Action=', action.payload.user.email);
-
+			console.warn('AuthReducer Login Successful ', action.payload.user.email);
 			return { ...state, user: action.payload.user };
 		//Todo Ask about it
 
 		case LOGIN_USER_ERROR:
 			console.warn('AuthReducer Action=', action.payload);
 
-			return { ...state, user: null };
+			return { ...state, error: 'Authentication Failed' };
 
 		default:
 			return state;

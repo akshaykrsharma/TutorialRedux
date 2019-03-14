@@ -23,6 +23,9 @@ function HookDemo() {
 const styles = {
 	mainContainerStyle: {
 		padding: 10,
+		borderRadius: 10,
+		shadowColor: 'black',
+		shadowOpacity: 0.2,
 		margin: 20,
 		alignItem: 'center',
 		justifyContent: 'center',
