@@ -6,6 +6,7 @@ import ReduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
 import LoginForm from './Login/LoginForm';
+import AppNavigation from './Navigation/AppNavigation';
 
 class App extends Component {
 	componentWillMount() {
@@ -25,7 +26,7 @@ class App extends Component {
 
 		return (
 			<Provider store={store}>
-				<LoginForm />
+				<AppNavigation />
 			</Provider>
 		);
 	}
