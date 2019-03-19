@@ -3,7 +3,7 @@ import { View, TextInput, ActivityIndicator, Alert } from 'react-native';
 import Header from '../component/Header';
 import Button from '../component/Button';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser } from '../actions/userAction';
 
 class LoginForm extends Component {
 	state = { isLoading: false };

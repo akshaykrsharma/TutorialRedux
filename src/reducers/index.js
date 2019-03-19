@@ -1,8 +1,8 @@
-import AuthReducer from './AuthReducer';
+import UserReducer from './UserReducer';
 
 export default (state, action) => {
 	return {
 		...state,
-		...AuthReducer(state, action)
+		...UserReducer(state, action)
 	};
 };

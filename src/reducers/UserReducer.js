@@ -1,5 +1,5 @@
 const INITIAL_STATE = { email: '', password: '', error: '' };
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS } from './../actions/types';
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS } from '../actions/types';
 
 export default (state, action) => {
 	console.log('AuthReducer Action=', action.type);
