@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, TextInput, ActivityIndicator } from 'react-native';
+import { View, TextInput, ActivityIndicator, Alert } from 'react-native';
 import Header from '../component/Header';
 import Button from '../component/Button';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import HookDemo from '../Hooks/HookDemo';
 
 class LoginForm extends Component {
+	state = { isLoading: false };
 	onEmailChange(text) {
 		this.props.emailChanged(text);
 	}
@@ -15,12 +15,15 @@ class LoginForm extends Component {
 	}
 	onButtonPress() {
 		const { email, password } = this.props;
-		this.props.loginUser({ email, password });
-	}
-
-	componentWillReceiveProps(props) {
-		console.warn('Next props=', JSON.stringify(props.user));
-		console.warn('props=', JSON.stringify(this.props.user));
+		this.setState({ isLoading: true });
+		this.props.loginUser({ email, password }, (status, response) => {
+			this.setState({ isLoading: false });
+			if (status) {
+				this.props.navigation.navigate('Home');
+			} else if (response) {
+				Alert.alert(response.error);
+			}
+		});
 	}
 
 	renderEmailText() {
@@ -39,6 +42,7 @@ class LoginForm extends Component {
 			<TextInput
 				secureTextEntry={true}
 				onChangeText={this.onPasswordChange.bind(this)}
+				value={this.props.password}
 				style={[styles.textInputStyle]}
 				placeholder={'Password'}
 			/>
@@ -46,7 +50,7 @@ class LoginForm extends Component {
 	}
 
 	renderSubmitButton() {
-		if (this.props.isLoading) {
+		if (this.state.isLoading) {
 			return <ActivityIndicator size="large" color="#0000ff" />;
 		}
 		return <Button onPress={this.onButtonPress.bind(this)} style={{ margin: 30 }} title={'Submit'} />;
@@ -55,11 +59,10 @@ class LoginForm extends Component {
 	render() {
 		return (
 			<View>
-				<Header title={'HEADING'} />
+				<Header title={'Login'} />
 				{this.renderEmailText()}
 				{this.renderPasswordText()}
 				{this.renderSubmitButton()}
-				<HookDemo />
 			</View>
 		);
 	}
@@ -75,13 +78,13 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-	console.log('mapToProps State=', JSON.stringify(state.AuthReducer));
-	const { email, password, isLoading, error } = state.AuthReducer;
+	const { email, password, isLoading, error, user } = state;
 	return {
 		email: email,
 		password: password,
 		isLoading: isLoading,
-		error: error
+		error: error,
+		user: user
 	};
 };
 

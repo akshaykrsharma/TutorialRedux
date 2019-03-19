@@ -1,6 +1,6 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_ERROR, IS_LOADING } from './types';
-import firebase from 'firebase';
-import axios from 'axios';
+import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS } from './types';
+
+import APIManager from '../Networking/ApiManager';
 
 export const emailChanged = text => {
 	console.log('emailInAction=', text);
@@ -20,31 +20,16 @@ export const passwordChanged = text => {
 	};
 };
 
-loginSuccess = user => {
-	return { type: LOGIN_USER_SUCCESS, payload: user };
-};
-
-export const loginUser = ({ email, password }) => {
+export const loginUser = ({ email, password }, cb) => {
 	return dispatch => {
-		dispatch({ type: IS_LOADING });
-		// axios
-		// 	.get('https://reqres.in/api/users/1')
-		// 	.then(response => {
-		// 		console.log(response);
-		// 		dispatch({ type: LOGIN_USER_SUCCESS, payload: response.data });
-		// 	})
-		// 	.catch(error => {
-		// 		console.log(error);
-		// 		dispatch({ type: LOGIN_USER_ERROR, payload: 'User Not Found' });
-		// 	});
-		firebase
-			.auth()
-			.signInWithEmailAndPassword(email, password)
-			.then(user => {
-				dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
-			})
-			.catch(() => {
-				dispatch({ type: LOGIN_USER_ERROR, payload: 'User Not Found' });
-			});
+		APIManager.getResponse('https://reqres.in/api/login', 'POST', { email, password }, (status, response) => {
+			console.log('Response=', status, response);
+			if (status) {
+				cb(status, response);
+				dispatch({ type: LOGIN_USER_SUCCESS, payload: response });
+			} else {
+				cb(status, response);
+			}
+		});
 	};
 };
