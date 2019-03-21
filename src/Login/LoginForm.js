@@ -4,8 +4,22 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions/userAction';
+import Utils from '../Utility/Utils';
+import { Colors } from 'theme';
 
 class LoginForm extends Component {
+	componentDidMount() {
+		Utils._retrieveData('userData', val => {
+			let userData = '';
+			if (!!val) userData = JSON.parse(val);
+			console.warn('userData.token=', userData.token);
+
+			if (!!userData.token) {
+				this.props.navigation.navigate('Home');
+			}
+		});
+	}
+
 	state = { isLoading: false };
 	onEmailChange(text) {
 		this.props.emailChanged(text);
@@ -51,9 +65,9 @@ class LoginForm extends Component {
 
 	renderSubmitButton() {
 		if (this.state.isLoading) {
-			return <ActivityIndicator size="large" color="#0000ff" />;
+			return <ActivityIndicator style={{ margin: 20 }} size="large" color="#0000ff" />;
 		}
-		return <Button onPress={this.onButtonPress.bind(this)} style={{ margin: 30 }} title={'Submit'} />;
+		return <Button onPress={this.onButtonPress.bind(this)} style={{ margin: 20 }} title={'Submit'} />;
 	}
 
 	render() {
@@ -72,7 +86,12 @@ const styles = {
 	textInputStyle: {
 		minHeight: 40,
 		backgroundColor: 'white',
-		marginTop: 10,
+		underlineColorAndroid: 'transparent',
+		marginTop: 20,
+		borderColor: Colors.BLACK_COLOR,
+		//borderRadius: 8,
+		borderWidth: 0.5,
+		padding: 5,
 		marginHorizontal: 30
 	}
 };

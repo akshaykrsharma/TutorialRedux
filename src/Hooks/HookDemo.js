@@ -11,9 +11,9 @@ function HookDemo() {
 		<View style={mainContainerStyle}>
 			<Text style={titleHooksStyle}>{Strings.testingTextHooks}</Text>
 			<View style={containerStyle}>
-				<Button style={buttonStyle} title={Strings.strIncreaseCount} onPress={() => setCount(count + 1)} />
-				<Text style={textStyle}>{count}</Text>
 				<Button style={buttonStyle} title={Strings.strDecreaseCount} onPress={() => setCount(count - 1)} />
+				<Text style={textStyle}>{count}</Text>
+				<Button style={buttonStyle} title={Strings.strIncreaseCount} onPress={() => setCount(count + 1)} />
 			</View>
 			<Text style={{ fontSize: 16 }}>{Strings.demoText}</Text>
 		</View>
