@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import Utils from './Utils';
+import Utils from '../Utility/Utils';
 import { Colors, Fonts } from 'theme';
 
 export default class Header extends Component {

@@ -7,13 +7,6 @@ import HookDemo from '../Hooks/HookDemo';
 let userData;
 
 class Home extends Component {
-	constructor(props) {
-		Utils._retrieveData('userData', val => {
-			if (!!val) userData = JSON.parse(val);
-			console.warn('userData.token=', userData.token);
-		});
-		super(props);
-	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -25,8 +18,8 @@ class Home extends Component {
 					}}
 					rightButton={'Logout'}
 					onRightPress={() => {
-						Utils._storeData('ç', '');
-						this.props.navigation.goBack();
+						Utils._storeData('userData', '');
+						this.props.navigation.navigate('LoginForm');
 					}}
 				/>
 				{this.props.user && <Text style={styles.textStyle}>{this.props.user.token}</Text>}
