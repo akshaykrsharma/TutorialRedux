@@ -1,6 +1,5 @@
 import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS } from './types';
 import APIManager from '../Networking/ApiManager';
-import { AsyncStorage } from 'react-native';
 import Utils from '../Utility/Utils';
 
 export const emailChanged = text => {

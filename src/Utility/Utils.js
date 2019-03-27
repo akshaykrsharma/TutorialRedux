@@ -10,13 +10,12 @@ export default class Utils {
 				// We have data!!
 				console.warn('value', value);
 				cb(value);
-				return value;
+			} else {
+				cb(null);
 			}
 		} catch (error) {
 			// Error retrieving data
 		}
-
-		return 'noData';
 	};
 
 	static _storeData = async (key, value) => {

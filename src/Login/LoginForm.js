@@ -3,25 +3,13 @@ import { View, TextInput, ActivityIndicator, Alert } from 'react-native';
 import Header from '../component/Header';
 import Button from '../component/Button';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser, setUser } from '../actions/userAction';
-import Utils from '../Utility/Utils';
+import { emailChanged, passwordChanged, loginUser } from '../actions/userAction';
 import { Colors } from 'theme';
 
 class LoginForm extends Component {
 	constructor(props) {
 		super(props);
-		Utils._retrieveData('userData', val => {
-			let userData = '';
-			if (!!val) userData = JSON.parse(val);
-			console.warn('userData.token=', userData.token);
-
-			if (!!userData.token) {
-				this.props.setUser(userData);
-				this.props.navigation.navigate('Home');
-			}
-		});
 	}
-
 	state = { isLoading: false };
 	onEmailChange(text) {
 		this.props.emailChanged(text);
@@ -111,5 +99,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ emailChanged, passwordChanged, loginUser, setUser }
+	{ emailChanged, passwordChanged, loginUser }
 )(LoginForm);
