@@ -4,22 +4,12 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions/userAction';
-import Utils from '../Utility/Utils';
 import { Colors } from 'theme';
 
 class LoginForm extends Component {
-	componentDidMount() {
-		Utils._retrieveData('userData', val => {
-			let userData = '';
-			if (!!val) userData = JSON.parse(val);
-			console.warn('userData.token=', userData.token);
-
-			if (!!userData.token) {
-				this.props.navigation.navigate('Home');
-			}
-		});
+	constructor(props) {
+		super(props);
 	}
-
 	state = { isLoading: false };
 	onEmailChange(text) {
 		this.props.emailChanged(text);

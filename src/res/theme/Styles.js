@@ -1,6 +1,6 @@
 import Colors from './Colors';
 import Fonts from './Fonts';
-import Utils from '../../component/Utils';
+import Utils from '../../Utility/Utils';
 const Styles = {
 	button: {
 		minWidth: 200,

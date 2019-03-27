@@ -3,8 +3,8 @@ import { StyleSheet, View, Text } from 'react-native';
 import Header from '../component/Header';
 import { connect } from 'react-redux';
 import Utils from '../Utility/Utils';
-import Button from '../component/Button';
 import HookDemo from '../Hooks/HookDemo';
+let userData;
 
 class Home extends Component {
 	render() {
@@ -19,7 +19,7 @@ class Home extends Component {
 					rightButton={'Logout'}
 					onRightPress={() => {
 						Utils._storeData('userData', '');
-						this.props.navigation.goBack();
+						this.props.navigation.navigate('LoginForm');
 					}}
 				/>
 				{this.props.user && <Text style={styles.textStyle}>{this.props.user.token}</Text>}
@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-	const user = state.user;
+	const user = !!userData ? userData : state.user;
+	//yaha per async storage se ayega
+
 	return {
 		user: user
 	};

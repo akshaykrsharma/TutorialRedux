@@ -1,10 +1,13 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from '../Home/Home';
 import LoginForm from '../Login/LoginForm';
-import HookDemo from '../Hooks/HookDemo';
+import Splash from '../Splash';
 
 const MainNavigator = createStackNavigator(
 	{
+		Splash: {
+			screen: Splash
+		},
 		LoginForm: {
 			screen: LoginForm
 		},

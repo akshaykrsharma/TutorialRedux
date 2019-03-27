@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import Utils from './Utils';
 
 import { Styles } from 'theme';
+import Utils from '../Utility/Utils';
 
 function Button(props) {
 	return (
