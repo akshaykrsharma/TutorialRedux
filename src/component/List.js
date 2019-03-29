@@ -32,8 +32,6 @@ export default class List extends Component {
 	}
 
 	render() {
-		console.warn(JSON.stringify(this.getDataForList()));
-
 		return (
 			<View style={Utils.styleMerger(styles.container, this.props.style)}>
 				{this.props.showSearch && (

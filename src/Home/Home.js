@@ -61,8 +61,8 @@ class Home extends Component {
 						this.props.navigation.navigate('LoginForm');
 					}}
 				/>
-				{/* {this.props.user && <Text style={styles.textStyle}>{this.props.user.token}</Text>}
-				<HookDemo /> */}
+				{this.props.user && <Text style={styles.textStyle}>{this.props.user.token}</Text>}
+				{/* <HookDemo /> */}
 				<List
 					searchLogic={(item, text) => item.last_name.toLowerCase().includes(text.toLowerCase())}
 					showSearch={true}
