@@ -25,7 +25,6 @@ export default class Utils {
 			const value = await AsyncStorage.getItem(key);
 			if (value !== null) {
 				// We have data!!
-				console.warn('value', value);
 				cb(value);
 			} else {
 				cb(null);

@@ -1,2 +1,2 @@
-import userAction from './userAction';
-export default userAction;
+import './userAction';
+import './userListAction';

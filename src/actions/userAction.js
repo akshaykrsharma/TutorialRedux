@@ -26,7 +26,7 @@ export const setUser = payload => {
 
 export const loginUser = ({ email, password }, cb) => {
 	return dispatch => {
-		APIManager.getResponse('https://reqres.in/api/login', 'POST', { email, password }, (status, response) => {
+		APIManager.getResponse('/api/login', 'POST', { email, password }, (status, response) => {
 			console.log('Response=', status, response);
 
 			//Call CallBack method which provides status(True from success and false for Error) and response from Api Call

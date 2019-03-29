@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //You may pass your own baseUrl Here
-const baseURL = '';
+const baseURL = 'https://reqres.in';
 const API = axios.create({ baseURL });
 
 import { PropTypes } from 'prop-types';
