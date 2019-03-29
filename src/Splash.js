@@ -22,7 +22,7 @@ class Splash extends Component {
 					this.props.navigation.navigate('LoginForm');
 				}
 			});
-		}, 3000);
+		}, 1500);
 	}
 	render() {
 		return (
