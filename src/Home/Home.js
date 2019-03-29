@@ -24,6 +24,28 @@ class Home extends Component {
 		});
 	}
 
+	renderListCell({ item }) {
+		return (
+			<View
+				style={{
+					flexDirection: 'row',
+					marginVertical: 10,
+					backgroundColor: 'rgba(0,0,0,0.1)',
+					borderRadius: 8,
+					shadowRadius: 5,
+					shadowWidth: 2,
+					shadowOpacity: 0.2
+				}}
+			>
+				<Image style={{ width: 100, height: 100, borderRadius: 8 }} source={{ uri: item.avatar }} />
+				<View style={{ marginHorizontal: 10, justifyContent: 'center' }}>
+					<Text style={{ fontSize: 20 }}>{item.first_name}</Text>
+					<Text style={{ fontSize: 16 }}>{item.last_name}</Text>
+				</View>
+			</View>
+		);
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -39,9 +61,14 @@ class Home extends Component {
 						this.props.navigation.navigate('LoginForm');
 					}}
 				/>
-				{this.props.user && <Text style={styles.textStyle}>{this.props.user.token}</Text>}
-				<HookDemo />
-				<List showSearch={true} data={this.state.userList.data} />
+				{/* {this.props.user && <Text style={styles.textStyle}>{this.props.user.token}</Text>}
+				<HookDemo /> */}
+				<List
+					searchLogic={(item, text) => item.last_name.toLowerCase().includes(text.toLowerCase())}
+					showSearch={true}
+					data={this.state.userList.data}
+					renderItem={this.renderListCell.bind(this)}
+				/>
 			</View>
 		);
 	}

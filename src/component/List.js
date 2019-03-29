@@ -15,7 +15,25 @@ export default class List extends Component {
 		return <Text style={{ fontSize: 20, alignSelf: 'center', color: 'red' }}>No Data Found</Text>;
 	}
 
+	searchLogic(item, text) {
+		return item.first_name.toLowerCase().includes(text.toLowerCase());
+	}
+
+	getDataForList() {
+		const text = this.state.searchedText;
+		if (!!text) {
+			//filterData
+			return this.props.data.filter(item =>
+				!!this.props.searchLogic ? this.props.searchLogic(item, text) : this.searchLogic(item, text)
+			);
+		} else {
+			return this.props.data;
+		}
+	}
+
 	render() {
+		console.warn(JSON.stringify(this.getDataForList()));
+
 		return (
 			<View style={Utils.styleMerger(styles.container, this.props.style)}>
 				{this.props.showSearch && (
@@ -23,44 +41,18 @@ export default class List extends Component {
 						<TextInput
 							style={{ height: '100%', width: '100%', paddingHorizontal: 10, backgroundColor: '#FFF', borderRadius: 5 }}
 							onChangeText={text => {
-								if (!!text && text.length > 0) {
-									const arr = this.props.data.filter(item =>
-										item.first_name.toLowerCase().includes(text.toLowerCase())
-									);
-
-									this.setState({ data: arr, noData: arr.length == 0 });
-								} else {
-									this.setState({ data: this.props.data, noData: false });
-								}
+								this.setState({ searchedText: text });
 							}}
 							placeholder={'Search'}
 						/>
 					</View>
 				)}
-				{this.state.noData && this.renderNoDta()}
+				{this.getDataForList() && this.getDataForList().length == 0 && this.renderNoDta()}
 				{!!this.state.data && (
 					<FlatList
 						style={{ width: '100%', paddingHorizontal: 20 }}
-						data={this.state.data}
-						renderItem={({ item }) => (
-							<View
-								style={{
-									flexDirection: 'row',
-									marginVertical: 10,
-									backgroundColor: 'rgba(0,0,0,0.1)',
-									borderRadius: 8,
-									shadowRadius: 5,
-									shadowWidth: 2,
-									shadowOpacity: 0.2
-								}}
-							>
-								<Image style={{ width: 100, height: 100, borderRadius: 8 }} source={{ uri: item.avatar }} />
-								<View style={{ marginHorizontal: 10, justifyContent: 'center' }}>
-									<Text style={{ fontSize: 20 }}>{item.first_name}</Text>
-									<Text style={{ fontSize: 16 }}>{item.last_name}</Text>
-								</View>
-							</View>
-						)}
+						data={this.getDataForList()}
+						renderItem={this.props.renderItem}
 					/>
 				)}
 			</View>
