@@ -16,7 +16,12 @@ export default class List extends Component {
 	}
 
 	searchLogic(item, text) {
-		return item.first_name.toLowerCase().includes(text.toLowerCase());
+		///Default Search according to whole values in JSON (whatever its first name, last name , etc.)
+		let defaultSearchedValue = '';
+		Object.keys(item).map(key => {
+			defaultSearchedValue += item[key];
+		});
+		return defaultSearchedValue.toLowerCase().includes(text.toLowerCase());
 	}
 
 	getDataForList() {
